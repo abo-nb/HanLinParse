@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="zhh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>翰林电子书解析</title>
+</head>
+
+<style>
+    .f1 {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        text-align: center;
+    }
+
+    .bookDiv {
+        text-align: center;
+    }
+
+    .btn {
+        background-color: white;
+        border: 1px solid black;
+        border-radius: 5px;
+        color: black;
+        padding: 10px 20px;
+        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    select {
+        background-color: white;
+        border: 1px solid black;
+        border-radius: 5px;
+        color: black;
+        padding: 10px 20px;
+        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+    }
+</style>
+
+
+<body>
+    <div class="f1">
+
+        <form action="#" id="F114514">
+            <h1>翰林电子书连结解析</h1>
+            <h3>解析完成会在底下，没有就是没有这书</h3>
+            <h6>使用代表你同意<a href="mzsm.txt">宇宙免则声明</a></h6>
+            <select name="year" id="year">
+                <option value="109A"> 109上</option>
+                <option value="109B"> 109下</option>
+                <option value="110A"> 110上</option>
+                <option value="110B"> 110下</option>
+                <option value="111A"> 111上</option>
+                <option value="111B"> 111下</option>
+                <option value="112A"> 112上</option>
+                <option value="112B"> 112下</option>
+            </select>
+            <select name="degree" id="degree">
+                <option value="PRIMARY">小学</option>
+                <option value="JUNIOR">初中</option>
+                <option value="SENIOR">高中</option>
+                <option value="VOCATIONAL">技高</option>
+            </select>
+            <select name="category" id="category">
+                <option value="國文">国文</option>
+                <option value="國語">国文（小学）</option>
+                <option value="英語">英文</option>
+                <option value="數學">数学</option>
+                <option value="自然科學">自然科学</option>
+                <option value="地理">地理</option>
+                <option value="歷史">历史</option>
+                <option value="公民">公民</option>
+                <option value="藝術">艺术</option>
+                <option value="綜合">综合</option>
+                <option value="健體">健体</option>
+                <option value="科技">科技</option>
+            </select>
+            <select name="productType" id="productType">
+                <option value="通用">通用</option>
+            </select>
+            <select name="os" id="os">
+                <option value="web">web</option>
+            </select>
+            <br><br>
+            <input class="btn" type="submit" value="解析" />
+        </form>
+    </div>
+
+    <div class="books" id="books">
+
+    </div>
+</body>
+
+<script>
+    document.getElementById('F114514').addEventListener('submit', function (e) {
+        e.preventDefault(); // Prevent the form from submitting normally
+
+        var url = new URL('https://edisc3.hle.com.tw/webapi/queryBookByCategory2023');
+        var formData = new FormData(document.getElementById('F114514'));
+        formData.forEach((value, key) => url.searchParams.append(key, value));
+
+        fetch(url, {
+            method: 'GET', // Use GET method
+        })
+            .then(response => response.json()) // Assuming the response is in JSON format
+            .then(data => {
+                // Log the response data to the console
+                BookGet(data.data)// You can now use the data in your JavaScript code
+            })
+            .catch(error => console.error('Error:', error));
+    });
+
+    function BookGet(books) {
+
+        books.forEach(Bookadd);
+    }
+    function Bookadd(book) {
+        yuanUrl = book.url;
+        AUrl = yuanUrl.replace('index.html', 'ebook');
+        ec = `email=114514FuckKs@1,1&api=https://edisc3.hle.com.tw/webapi/&ebook=${AUrl}`;
+        bec = btoa(ec);
+        url = `https://h5.hle.com.tw/toolbar/release/index.html?encode=${bec}`;
+        CreatBookDiv(book.cover, book.subject, url);
+
+
+    }
+    function CreatBookDiv(imgsrc, name, url) {
+        // 创建div元素
+        var div = document.createElement('div');
+        div.className = 'bookDiv';
+
+        // 创建img元素
+        var img = document.createElement('img');
+        img.src = imgsrc; // 设置图片的源
+        img.alt = '无图片'; // 设置替代文本
+        img.width = 230;
+        img.height = 302;
+        div.appendChild(img); // 将img元素添加到div元素中
+
+        // 创建h3元素
+        var h3 = document.createElement('h3');
+        h3.textContent = name; // 设置h3元素的文本内容
+        div.appendChild(h3); // 将h3元素添加到div元素中
+
+        // 创建button元素
+        var button = document.createElement('button');
+        button.className = 'btn';
+        button.textContent = '启动！'; // 设置button元素的文本内容
+        button.onclick = function () {
+            window.location.href = url; // 设置button元素的onclick事件
+        };
+        div.appendChild(button); // 将button元素添加到div元素中
+        var books = document.querySelector('.books');
+
+        // 将div元素添加到class为books的元素中
+        books.appendChild(div);
+    }
+</script>
+
+</html>
