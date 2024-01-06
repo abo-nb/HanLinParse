@@ -114,7 +114,8 @@
     });
 
     function BookGet(books) {
-
+        var booksdiv = document.querySelector('.books');
+        booksdiv.replaceChildren();
         books.forEach(Bookadd);
     }
     function Bookadd(book) {
