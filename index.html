@@ -46,7 +46,6 @@
 
         <form action="#" id="F114514">
             <h1>翰林电子书连结解析</h1>
-            <h2>这玩意现在已经用不了了（悲）</h2>
             <h3>解析完成会在底下，没有就是没有这书</h3>
             <h6>使用代表你同意<a href="mzsm.txt">宇宙免则声明</a></h6>
             <select name="year" id="year">
@@ -56,8 +55,41 @@
                 <option value="110B"> 110下</option>
                 <option value="111A"> 111上</option>
                 <option value="111B"> 111下</option>
-                <option value="112A"> 112上</option>
-                <option value="112B"> 112下</option>
+                <option value="112A"> 112 上</option>
+                <option value="112B"> 112 下</option>
+                <option value="113A"> 113 上</option>
+                <option value="113B"> 113 下</option>
+                <option value="114A"> 114 上</option>
+                <option value="114B"> 114 下</option>
+                <option value="113A"> 113 上</option>
+                <option value="113B"> 113 下</option>
+                <option value="114A"> 114 上</option>
+                <option value="114B"> 114 下</option>
+                <option value="115A"> 115 上</option>
+                <option value="115B"> 115 下</option>
+                <option value="114A"> 114 上</option>
+                <option value="114B"> 114 下</option>
+                <option value="115A"> 115 上</option>
+                <option value="115B"> 115 下</option>
+                <option value="116A"> 116 上</option>
+                <option value="116B"> 116 下</option>
+                <option value="115A"> 115 上</option>
+                <option value="115B"> 115 下</option>
+                <option value="116A"> 116 上</option>
+                <option value="116B"> 116 下</option>
+                <option value="117A"> 117 上</option>
+                <option value="117B"> 117 下</option>
+                <option value="116A"> 116 上</option>
+                <option value="116B"> 116 下</option>
+                <option value="117A"> 117 上</option>
+                <option value="117B"> 117 下</option>
+                <option value="118A"> 118 上</option>
+                <option value="118B"> 118 下</option>
+                <option value="117A"> 117 上</option>
+                <option value="117B"> 117 下</option>
+                <option value="118A"> 118 上</option>
+                <option value="118B"> 118 下</option>
+
             </select>
             <select name="degree" id="degree">
                 <option value="PRIMARY">小学</option>
@@ -135,11 +167,13 @@
         AUrl = yuanUrl.replace('index.html', 'ebook');
         ec = `email=114514FuckKs@1,1&api=https://edisc3.hle.com.tw/webapi/&ebook=${AUrl}`;
         bec = btoa(ec);
-        url = `https://h5.hle.com.tw/toolbar/release/index.html?encode=${bec}`;
+        url = `${bec}`;
         CreatBookDiv(book.cover, book.subject, url);
 
 
     }
+
+
     function CreatBookDiv(imgsrc, name, url) {
         // 创建div元素
         var div = document.createElement('div');
@@ -163,13 +197,47 @@
         button.className = 'btn';
         button.textContent = '启动！'; // 设置button元素的文本内容
         button.onclick = function () {
-            window.location.href = url; // 设置button元素的onclick事件
+            var uuid = _uuid();
+
+            let body = {
+                "origin": "edisc3.hle.com.tw",
+                "href": "https://edisc3.hle.com.tw/edisc_v3/ebook_v2023.html#degree=%25E5%259C%258B%25E4%25B8%25AD&cat=%25E6%2595%25B8%25E5%25AD%25B8&prd=JMA&year=113%25E4%25B8%258B&grade=%25E4%25B8%2580%25E5%25B9%25B4%25E7%25B4%259A",
+                "encode": `${url}`,
+                "fbse": "11111111111111_11111_edsic3web",
+                "token": "eyJhbGciOiJSUzI1NiIsImtpZCI6Ijg1NzgwNWYxZGQ3ZmE5YTZiNTI3ZjQ0ZWNmZmJkNDhjIiwidHlwIjoiYXQrand0In0.eyJuYmYiOjE3MjcwMDk4MjcsImV4cCI6MTc1OTE1MDYyNywiaXNzIjoiaHR0cHM6Ly9pZC5obGUuY29tLnR3IiwiYXVkIjpbImFwaTEiLCJJZGVudGl0eVNlcnZlckFwaSIsImhhbmxpbi1hcGkiXSwiY2xpZW50X2lkIjoianMiLCJzdWIiOiJiNzcyMjA5MS00YWQyLTQxYTQtYjMzZi05YzQyNDZjNzYxOTQiLCJhdXRoX3RpbWUiOjE3MjcwMDk4MjcsImlkcCI6ImxvY2FsIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvZW1haWxhZGRyZXNzIjoia29sYWRpMTc2MkBidXpibG94LmNvbSIsIkFzcE5ldC5JZGVudGl0eS5TZWN1cml0eVN0YW1wIjoiN0dGSURIWktFV1BUSldRQko3STdNNVU0NVlXMklRUjUiLCJyb2xlIjoi6ICB5birIiwiZW1haWwiOiJrb2xhZGkxNzYyQGJ1emJsb3guY29tIiwiZmFtaWx5X25hbWUiOiLlhbHlkIwiLCJnaXZlbl9uYW1lIjoi55So5oi2IiwibmFtZSI6IuWFseWQjOeUqOaItiIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJwaG9uZV9udW1iZXIiOiIwOTI4MzUyOTUxIiwicGhvbmVfbnVtYmVyX3ZlcmlmaWVkIjp0cnVlLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiLlhbHlkIznlKjmiLYiLCJ1c2VyX2RvbWFpbiI6ImVkdSIsInNjaG9vbFN5c3RlbSI6IuWci-WwjyIsImlzaWRlbnRpZmllZCI6dHJ1ZSwibG9jayI6ZmFsc2UsInZlciI6Mywic2NvcGUiOlsib3BlbmlkIiwicHJvZmlsZSIsImFwaTEiLCJJZGVudGl0eVNlcnZlckFwaSIsImhhbmxpbi1hcGkiLCJvZmZsaW5lX2FjY2VzcyJdLCJhbXIiOlsicHdkIl19.PGXhy1RBo_ff1lzvinDS8pR7qOeeotbQTaaW8kRRaF35Ga9QnhFM1FArfHXofPwNQvwok7KLfOosCA8iegJC2dN2EZPSflZMHD8VPn4UZ6ZJTSAXt2s_T-hm6MEZM9iNoDerlam9G64evmtfrW0qygnLrMqVjGxVxXiy0pOM-8VcVMkc-iBNzZRV-vxnokS0jqQCTwAdkVMKCuFksrpRNtg2HLAAwVPosey5rjnBH4ivIMUey1dbZzaHRQwdZ3_ZDM5h9-j_1LKGvrVpNQ-VcLc2-iShUVbb0bxwCzpkmTJ1ySSH4edZV36rFgXQNcDASARC5ujBUVQ79Brc6hR37w"
+            }
+
+
+
+            //post
+            fetch(`https://api-edisc3.hle.com.tw/edisc-token-interact?tokenId=${uuid}`, {
+                method: "POST",
+                body: JSON.stringify(body)
+            })
+
+                .then(response => fetch(`https://api-edisc3.hle.com.tw/edisc-token-interact?tokenId=${uuid}`, {
+                    method: "GET"
+                })
+
+                    .then(response => console.log(response)));
+
+
+
+            console.log(uuid);
+            window.location.href = `https://gl.hle.com.tw/toolbar/release/index.html?key=${uuid}`; // 设置button元素的onclick事件
         };
         div.appendChild(button); // 将button元素添加到div元素中
         var books = document.querySelector('.books');
 
         // 将div元素添加到class为books的元素中
         books.appendChild(div);
+    }
+
+    function _uuid() {
+        function s4() {
+            return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
+        }
+        return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
     }
 </script>
 
